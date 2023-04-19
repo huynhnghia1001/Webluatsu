@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/54f0cb7e4a.js"
+	crossorigin="anonymous"></script>
+<link href="/assets/css/style1.css" rel="stylesheet" />
+<title>Hello</title>
+</head>
+<body>
+
+	<div th:replace="/layout/_menu1.html"></div> 
+	<section class="big-image">
+		<div class="big-image-content">
+			<h2 th:text="#{nav.sls}"></h2>
+			<p th:text="#{nav.slogan}"></p>
+		</div>
+	</section>
+	<section class="about section-pading">
+		<div class="conteiner">
+			<div class="row">
+				<div class="section-title">
+					<h2 th:text="#{nav.vct}"></h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="about-item">
+					
+					<p th:text="#{gt.100}">If the superior only uses his eyes to judge things, the servants will paint more colors. If the superiors only use their ears to judge things, the servants will make more sounds. If the superior shows his thinking to judge things, the servants will cause more confusion. Besides, the superiors don't have the energy or the time to do it all. Therefore, the superior must grasp the main thing to judge: That is the Law. Using the law, one can control all four seas. The deceiver suffers. The flatterer also accepts. Those who are far away as well as those who are near. The officials do not encroach on each other</p>
+					
+					<a href="/accounts/gioithieu" class="btn" th:text="#{nav.xgt}"></a>
+					<a href="/accounts/nganhang" class="btn" th:text="#{nt.1.1}"></a>
+				</div>
+				<div class="about-item">
+					<div class="about-item-img">
+						<span th:text="#{nav.5nam}"></span> <img
+							src="/assets/images/bao.jpg" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="phan-hoi section-pading">
+	<form action="/product/list" method="post" class="conteiner">
+	<br>
+		      <b th:text="#{tim.kiem}"></b>
+		      <div class="others">
+        <li><input placeholder="Tìm Kiếm" name="sp" type="text"><i class="fas fa-search"></i></li>
+    </div>
+    <button class="btn" th:text="#{tim.1}" type="submit">Tìm</button>
+		    </form>
+		<div class="conteiner">
+			<div class="row">
+				<div class="section-title">
+					<h2 th:text="#{nav.ls}"></h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="phan-hoi-items">
+					<div th:each="p: ${items}" class="phan-hoi-item">
+						<div class="phan-hoi-item-content">
+							<div class="phan-hoi-item-img-content-text">
+								<h2>[[${p.fullname}]]</h2>
+								<p th:text="#{nav.ls}"></p>
+								<p
+						th:if="${#request.isUserInRole('LAW')}">
+						<a th:href="@{|/law/thongtincanhan/${p.id}|}">Chat</a>
+					</p>
+							</div>
+							<div class="phan-hoi-item-img-content-img">
+								<a th:href="@{|/home/thongtin/${p.id}|}"><img th:src="@{|/assets/images/${p.image}|}"></a>
+							</div>
+						</div>
+					
+						<div class="phan-hoi-item-star">
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+	<section class="footer">
+		<div class="footer-bg"></div>
+		<div class="conteiner">
+			<div class="row justify-content">
+				<div class="footer-item">
+					<h2 th:text="#{nav.dc}"></h2>
+					<p>
+						54 W Hubbard St #300 <br>Chicago, IL 60654, Hoa Kỳ
+					</p>
+				</div>
+				<div class="footer-item">
+					<h2 th:text="#{nav.gpv}"></h2>
+					<p>
+						7:30 - 22:00<br>All day
+					</p>
+				</div>
+				<div class="footer-item">
+					<h2 th:text="#{nav.lh}"></h2>
+					<p>
+						Phone: 0945518212<br>Email: luckyman5@gmail.com
+					</p>
+					<div class="footer-social">
+						<i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i
+							class="fab fa-youtube"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="conteiner">
+			<div class="footer-copyright">Helolooooooooooooooooooooooo</div>
+		</div>
+	</section>
+
+	<script src="/assets/js/script.js"></script>
+</body>
+</html>

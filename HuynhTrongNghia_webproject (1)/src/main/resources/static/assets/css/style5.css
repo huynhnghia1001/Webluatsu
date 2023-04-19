@@ -1,0 +1,19 @@
+*{
+	margin: 0;
+	padding: 0;
+	outline: none;
+	box-sizing: border-box;
+}
+.btn {
+	background-color: transparent;
+	padding: 15px 30px;
+	border: 2px solid var(--sub-color);
+	border-radius: 50px;
+	color: var(--sub-color);
+	cursor: pointer;
+	transition: all 0.3 ease;
+}
+.nav navbar-nav a{
+	color: orange;
+	font-size: 20px;
+}

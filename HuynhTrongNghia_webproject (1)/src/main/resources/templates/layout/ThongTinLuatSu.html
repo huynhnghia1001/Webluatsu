@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/54f0cb7e4a.js"
+	crossorigin="anonymous"></script>
+<link href="/assets/css/style1.css" rel="stylesheet" />
+<title>Hello</title>
+</head>
+<body>
+	<div th:replace="/layout/_menu1.html"></div>
+	<section class="big-image">
+		<div class="big-image-content">
+			<h2>Siêu Luật Sư</h2>
+			<p>Hãy để công lý được thực hiện cho dù bầu trời có sụp đổ</p>
+			<button class="big-image-content-btn btn">Menu</button>
+		</div>
+	</section>
+	<section class="about section-pading">
+		<div class="conteiner">
+			<div class="row">
+				<div class="section-title">
+					<h2 data-title="Giới Thiệu">Luật Sư</h2>
+				</div>
+			</div>
+			<div class="row" th:each="p: ${items}">
+				<div class="about-item">
+					<h2>[[${p.fullname}]]</h2>
+					<p>[[${p.infomation}]]</p>
+					<h3>100.00$/3h</h3>
+					<br> <a th:href="@{|/law/thongtincanhan/${p.id}|}"><button
+							class="btn">Bắt đầu trao đổi</button></a>
+				</div>
+				<div class="about-item">
+					<div class="about-item-img">
+						<span>Hơn 7 năm kinh nghiệm</span> <a>
+						<img th:src="@{|/assets/images/${p.image}|}"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+
+
+	
+
+	<section class="footer">
+		<div class="footer-bg"></div>
+		<div class="conteiner">
+			<div class="row justify-content">
+				<div class="footer-item">
+					<h2>Địa Chỉ</h2>
+					<p>
+						2,Trần Nam Phú<br>Ninh Kiều, Cần Thơ
+					</p>
+				</div>
+				<div class="footer-item">
+					<h2>Giờ Phục Vụ</h2>
+					<p>
+						7:30 - 22:00<br>All day
+					</p>
+				</div>
+				<div class="footer-item">
+					<h2>Liên Hệ</h2>
+					<p>
+						Phone: 0945518212<br>Email: luckyman5@gmail.com
+					</p>
+					<div class="footer-social">
+						<i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i
+							class="fab fa-youtube"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="conteiner">
+			MARC-ANDRE SEGUIN
+			<div class="footer-copyright">
+
+				<iframe
+					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.4181008669234!2d-73.5587936844413!3d45.5016614791013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a5906c84aab%3A0x2dd699b6cc6139be!2s417%20Rue%20Saint-Pierre%2C%20Montr%C3%A9al%2C%20QC%20H2Y%201Y2%2C%20Canada!5e0!3m2!1svi!2s!4v1632294716197!5m2!1svi!2s"
+					width="100%" height="480"></iframe>
+
+			</div>
+		</div>
+	</section>
+
+	<script src="/assets/js/script.js"></script>
+</body>
+</html>

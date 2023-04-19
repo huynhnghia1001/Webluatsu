@@ -1,0 +1,6 @@
+body { text-align: center;}
+input, textarea {
+  display: block;
+  margin: 10px;
+  padding: 10px;
+}

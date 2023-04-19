@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://kit.fontawesome.com/54f0cb7e4a.js" crossorigin="anonymous"></script>
+	<link href="/assets/css/style1.css" rel="stylesheet" />
+	<title>Hello</title>
+	<style>
+	/* big image */
+	.big-image {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100vw;
+		height: 100vh;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.big-image::before {
+		content: "";
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-image: url("/assets/images/bia1.jpg");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		z-index: -2;
+		animation: Inout 5s infinite;
+	}
+
+	@keyframes Inout {
+
+		0%,
+		100% {
+			transform: scale(1);
+		}
+
+		50% {
+			transform: scale(1.1);
+		}
+	}
+
+	.big-image::after {
+		content: "";
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: black;
+		opacity: 0.3;
+		z-index: -2;
+	}
+
+	.big-image .big-image-content {
+		text-align: center;
+		max-width: 500px;
+	}
+
+	.big-image .big-image-content h2 {
+		font-size: 50px;
+		color: var(--text-color);
+		font-family: 'Dancing Script';
+	}
+
+	.big-image .big-image-content p {
+		font-size: 25px;
+		color: var(--text-color);
+		font-weight: 15px 0;
+	}
+
+	/* about */
+	.about {
+		background-color: #191007;
+		color: white;
+
+	}
+
+	.section-title {
+		width: 100%;
+		text-align: center;
+		margin-bottom: 30px;
+	}
+
+	.section-title h2 {
+		font-size: 40px;
+		color: var(--text-color);
+		text-transform: uppercase;
+	}
+
+	.section-title h2::before {
+		content: attr(data-title);
+		display: block;
+		color: var(--sub-color);
+		font-size: 35px;
+		font-family: 'Dancing Script';
+	}
+
+	.about .about-item h2 {
+		color: var(--text-color);
+		font-size: 35px;
+	}
+
+	.about .about-item p {
+		font-size: 18px;
+		margin: 15px 0 30px;
+		color: var(--text-color);
+	}
+
+	.about .about-item img {
+		width: 100%;
+		border-radius: 10px;
+	}
+
+	.about-item {
+		width: calc(100%/2);
+		padding: 15px;
+	}
+
+	.about-item-img {
+		position: relative;
+	}
+
+	.about-item-img span {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		color: var(--text-color);
+		font-family: 'Dancing Script';
+		font-weight: 900;
+		font-size: 30px;
+		transform: translate(-50%, -50%);
+	}
+
+	.about-item-img::before {
+		content: "";
+		display: block;
+		width: 100px;
+		height: 100px;
+		border: 3px solid var(--sub-color);
+		position: absolute;
+		top: calc(50% - 50px);
+		left: calc(50% - 50px);
+		/* top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%); */
+		animation: xoayVong 5s infinite;
+	}
+
+	@keyframes xoayVong {
+		0% {
+			transform: rotate(0deg);
+		}
+
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	/* menu */
+	.menu {
+		background-color: var(--bg-color);
+	}
+
+	.menu-title {
+		width: 100%;
+		text-align: center;
+	}
+
+	.menu-title .menu-button {
+		background-color: transparent;
+		margin: 10px 12px;
+		border: none;
+		font-size: 20px;
+		color: var(--text-color);
+		cursor: pointer;
+	}
+
+	.menu-title .menu-button.active {
+		color: var(--sub-color)
+	}
+
+	.menu-title .menu-button:hover {
+		color: var(--sub-color);
+	}
+
+	.food-items {
+		width: 50%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 20px 15px;
+		position: relative;
+	}
+
+	.food-items::before {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 15px;
+		right: 15px;
+		bottom: 0;
+		border: 1px dashed var(--main-color);
+	}
+
+	.food-items:hover .food-item p {
+		color: var(--sub-color);
+	}
+
+	.food-items:hover .food-price p {
+		color: var(--text-color);
+	}
+
+	.food-item {
+		display: flex;
+		align-items: center;
+	}
+
+	.food-item img {
+		width: 150px;
+		margin-right: 12px;
+	}
+
+	.food-item p {
+		color: var(--text-color);
+		transition: all 0.3s ease-in;
+		font-size: 20px;
+	}
+
+	.food-price p {
+		color: var(--sub-color);
+		transition: all 0.3s ease-in;
+		font-size: 20px;
+	}
+
+	.menu-item-content {
+		display: none;
+	}
+
+	.menu-item-content.active {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	/* phản hổi */
+	.phan-hoi {
+		background-color: var(--main-color);
+	}
+
+	.phan-hoi-items {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.phan-hoi-item {
+		width: calc(100%/3 - 30px);
+		margin: 0 15px;
+		border: 2px solid var(--bg-color);
+		padding: 15px;
+		border-radius: 10px;
+		/* box-shadow: 0,0,0,15px rgba(0, 0, 0, 0.7); */
+	}
+
+	.phan-hoi-item:hover img {
+		border-color: var(--sub-color);
+	}
+
+	.phan-hoi-item span {
+		color: var(--text-color);
+	}
+
+	.phan-hoi-item h2 {
+		font-size: 20px;
+		color: var(--text-color);
+	}
+
+	.phan-hoi-item p {
+		color: var(--text-color);
+		font-size: 20px;
+		margin: 20px 0;
+	}
+
+	.phan-hoi-item img {
+		width: 100px;
+		border-radius: 50%;
+		border: 4px solid var(--bg-color);
+		transition: all 0.5s ease;
+	}
+
+	.phan-hoi-item-content {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.phan-hoi-item-star i {
+		color: var(--text-color);
+	}
+
+	/* team */
+	.team {
+		background-color: var(--bg-color);
+	}
+
+	.team-items {
+		padding: 15px;
+		width: calc(100%/3);
+		position: relative;
+	}
+
+	.team-items img {
+		width: 100%;
+		border-radius: 10px;
+		transition: all 0.5s ease;
+	}
+
+	.team-items:hover .team-items-text {
+		background-color: var(--sub-color);
+		transform: translateY(-50px);
+	}
+
+	.team-items:hover img {
+		transform: skewX(2deg);
+	}
+
+	.team-items-text {
+		position: relative;
+		padding: 15px 0;
+		right: 30px;
+		left: 30px;
+		bottom: 0;
+		background-color: var(--main-color);
+		text-align: center;
+		border-radius: 10px;
+		transform: translateY(50%);
+		transition: all 0.5s ease;
+	}
+
+	.team-items-text h2 {
+		color: var(--text-color);
+	}
+
+	.team-items-text span {
+		color: var(--text-color)
+	}
+
+	/* footer */
+
+	.footer {
+		padding-top: 80px;
+		position: relative;
+	}
+
+	.footer-bg {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-image: url("/assets/images/footer.jpg");
+		z-index: -2;
+	}
+
+	.footer::before {
+		position: absolute;
+		content: "";
+		width: 100%;
+		height: 100%;
+		background-color: black;
+		top: 0;
+		opacity: 0.4;
+		z-index: -1;
+	}
+
+	.footer-item {
+		text-align: center;
+		width: calc(100%/3);
+	}
+
+	.footer-item i {
+		color: #ffffff;
+		font-size: 25px;
+		margin-right: 12px;
+		cursor: pointer;
+		transition: var(--sub-color);
+	}
+
+	.footer-item i:hover {
+		color: var(--sub-color);
+	}
+
+	.footer h2 {
+		color: var(--text-color);
+		font-size: 20px;
+	}
+
+	.footer p {
+		color: var(--text-color);
+		margin: 12px 0;
+	}
+
+	.footer-copyright {
+		text-align: center;
+		padding: 50px 0 12px;
+		color: #fff;
+		margin-top: 20px;
+		border-top: 2px solid var(--bg-color);
+	}
+
+	.ab {
+		margin-left: 2%;
+	}
+</style>
+</head>
+
+<body>
+	
+	<div th:replace="/layout/_menu1.html"></div> 
+	<section class="big-image">
+		<div class="big-image-content">
+			<h2 th:text="#{nav.sls}"></h2>
+			<p th:text="#{nav.slogan}"></p>
+		</div>
+	</section>
+	<section class="about section-pading">
+		<div class="ab">
+			<p>
+				<h1 th:text="#{gt.1.1}">GIỚI THIỆU VỀ CÔNG TY LUẬT SIÊU LUẬT SƯ</h1>
+				<li>
+				<li th:text="#{gt.1.2}">Công ty luật SIÊU LUẬT SƯ là điểm hội tụ của những luật sư, chuyên gia pháp lý danh tiếng và được
+					xếp hạng cao trong nhiều lĩnh vực luật sâu rộng tại Việt Nam và quốc tế. SIÊU LUẬT SƯ không chỉ cung
+					cấp dịch vụ pháp lý đa dạng tại Việt Nam mà còn ở thị trường quốc tế nơi các doanh nghiệp Việt Nam
+					có quan hệ thương mại. Mục tiêu của ASL LAW là đảm bảo khách hàng được tiếp cận tư vấn pháp lý
+					nhanh, luật sư phù hợp với từng đối tượng, không giới hạn phạm vi lãnh thổ, loại bỏ chi phí pháp lý
+					không cần thiết.</li>
+			</p>
+			<p>
+			<h1 th:text="#{gt.1.3}">AI LÀ KHÁCH HÀNG CỦA SIÊU LUẬT SƯ?</h1>
+			<li>
+			<li th:text="#{gt.1.4}"> Khách hàng của Công ty luật SIÊU LUẬT SƯ bao gồm:</li>
+			<p>
+			<p>
+			<h1 th:text="#{gt.1.5}">ĐÂU LÀ GIÁ TRỊ NỔI BẬT TRONG DỊCH VỤ PHÁP LÝ CỦA SIÊU LUẬT SƯ?</h1>
+			<li th:text="#{gt.1.6}">Điều đáng tự hào là Công ty luật SIÊU LUẬT SƯ đã thuyết phục, mời và tập hợp thành công các luật sư và
+				chuyên gia pháp lý hàng đầu trong các lĩnh vực pháp lý toàn diện. Do đó, SIÊU LUẬT SƯ có thể cung cấp
+				một dịch vụ pháp lý chọn gói cho khách hàng của chúng tôi. Dịch vụ pháp lý của chúng tôi bao gồm:</li>
+			
+
+			</p>
+		</div>
+	</section>
+	<section class="footer">
+		<div class="footer-bg"></div>
+		<div class="conteiner">
+			<div class="row justify-content">
+				<div class="footer-item">
+					<h2 th:text="#{nav.dc}"></h2>
+					<p>
+						54 W Hubbard St #300 <br>Chicago, IL 60654, Hoa Kỳ
+					</p>
+				</div>
+				<div class="footer-item">
+					<h2 th:text="#{nav.gpv}"></h2>
+					<p>
+						7:30 - 22:00<br>All day
+					</p>
+				</div>
+				<div class="footer-item">
+					<h2 th:text="#{nav.lh}"></h2>
+					<p>
+						Phone: 0945518212<br>Email: luckyman5@gmail.com
+					</p>
+					<div class="footer-social">
+						<i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i
+							class="fab fa-youtube"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="conteiner">
+			<div class="footer-copyright">Helolooooooooooooooooooooooo</div>
+		</div>
+	</section>
+
+	<script src="/assets/js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<div xmlns:th="http://www.thymeleaf.org">
+	<section class="top">
+		<div class="conteiner">
+			<div class="row justify-content">
+				<a href="/home/index">
+					<div class="logo">
+						<img src="/assets/images/a.png">
+					</div>
+				</a>
+				<div class="menu-bar" th:if="${#request.remoteUser}">
+				<h2><a th:if="${#request.isUserInRole('LAW') or #request.isUserInRole('ADMIN')}">
+						<a th:href="@{/admin/home/index}">Admin</a></h2>
+					<a th:href="@{/home/index}">
+						<h2 th:text="#{nav.home}"></h2>
+					</a> <a th:href="@{/list/khainiem}">
+						<h2 th:text="#{nav.kn}"></h2>
+					</a> <a th:href="@{/accounts/doimk}">
+						<h2 th:text="#{nav.dmk}"></h2>
+					</a>
+					<div class="bao">
+						<h4>
+							<a href="?lang=vi">Vietnamese||</a> <a href="?lang=en">English</a>
+						</h4>
+					</div>
+					<h2></h2>
+					<span></span>
+				</div>
+				<th:block th:unless="${#request.remoteUser}">
+					<div class="menu-bar">
+						<a th:href="@{/home/index}">
+							<h2 th:text="#{nav.home}"></h2>
+						</a> <a th:href="@{/accounts/khainiem}">
+							<h2 th:text="#{nav.kn}"></h2>
+						</a> <a th:href="@{/accounts/loginForm}">
+							<h2 th:text="#{nav.dn}"></h2>
+						</a>
+						<div class="bao">
+							<h4>
+								<a href="?lang=vi">Vietnamese||</a> <a href="?lang=en">English</a>
+							</h4>
+						</div>
+						<h2></h2>
+						<span></span>
+					</div>
+				</th:block>
+				<div class="menu-items">
+					<ul>
+						<h2 th:text="#{nav.menu}"></h2>
+						<li class="menu-item"><a href="khainiem.html"></a></li>
+						<li class="menu-item"><a th:each="c:${cates}"
+							th:href="@{|/home/index?cid=${c.id}|}" class="list-group-item">[[${c.name}]]<br></a></li>
+						<div th:if="${#request.remoteUser}">
+							<h3>
+								<a th:href="@{/security/logoff}" th:text="#{nav.dx}">Đăng
+									Xuất</a>
+							</h3>
+							
+						</div>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

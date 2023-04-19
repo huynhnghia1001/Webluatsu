@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/54f0cb7e4a.js"
+	crossorigin="anonymous"></script>
+<link href="/assets/css/style1.css" rel="stylesheet" />
+<title>Hello</title>
+</head>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+	(function(){
+	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+	s1.async=true;
+	s1.src='https://embed.tawk.to/614bd60c25797d7a89005c65/1fg83o8sv';
+	s1.charset='UTF-8';
+	s1.setAttribute('crossorigin','*');
+	s0.parentNode.insertBefore(s1,s0);
+	})();
+	</script>
+	<!--End of Tawk.to Script-->
+<body>
+<div th:replace="/layout/_menu1.html"></div>
+	<section class="big-image">
+		<div class="big-image-content">
+			<h2>Siêu Luật Sư</h2>
+			<p>Hãy để công lý được thực hiện cho dù bầu trời có sụp đổ</p>
+		</div>
+	</section>
+	
+	
+	<section class="about section-pading">
+		<div class="conteiner">
+			<div class="row">
+				<div class="section-title">
+					<h2 data-title="Giới Thiệu">Luật Sư</h2>
+				</div>
+			</div>
+			<div class="row" th:each="p: ${items}">
+				<div class="about-item">
+					<div class="about-item-img">
+						<span>Hơn 7 năm kinh nghiệm</span>
+						<img th:src="@{|/assets/images/${p.image}|}"></a>
+					</div>
+					<div style="color: #ffffff;">
+						<p>
+						<h3>THỜI GIAN LÀM VIỆC:</h3><br>
+						* Sáng 7h30 đến 11h00 <br>
+						* Chiều 13h30 đến 17h00 <br><br>
+
+						<h3>THÔNG TIN LIÊN HỆ:</h3><br>
+						- Số điện thoại liên hệ: 0984 499 996 hoặc 0985 158 595<br>
+						- Địa chỉ văn Phòng chính : Lầu 3, Số 422 , Võ Văn Kiệt, Phường Cô Giang, Quận 1, Tp HCM.<br>
+						- Văn phòng giao dịch : 158/1A Nguyễn Sơn, Phường Phú Thọ Hòa, Quận Tân Phú,Tp HCM.
+						</p>
+					</div>
+
+				</div>
+				<div class="about-item">
+					<h2>[[${p.fullname}]]</h2>
+					<p>[[${p.infomation}]]</p>
+					<a th:if="${#request.isUserInRole('LAW') or #request.isUserInRole('ADMIN')}" href="">[[${p.linkchat}]]</a>
+				</div>
+				<a th:href="@{|/mail/${p.id}|}">Phản hồi</a>
+			</div>
+			
+		</div>
+		</div>
+	</section>
+	
+	
+	
+	
+	
+	
+	<section class="team">
+		<div class="conteiner section-pading">
+			<div class="row">
+				<div class="section-title">
+					<h2 data-title="Luật Sư"></h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="team-items">
+					<a href="/accounts/khainiem"><img src="/assets/images/luat-dan-su.jpg" ></a>
+					<div class="team-items-text">
+						<h2>Luật</h2>
+						<span>Dân Sự</span>
+					</div>
+				</div>
+				<div class="team-items">
+					<a href="/accounts/khainiem"><img src="/assets/images/luathinhsu.jpg"></a>
+					<div class="team-items-text">
+						<h2>Luật</h2>
+						<span>Hình Sự</span>
+					</div>
+				</div>
+				<div class="team-items">
+					<a href="/accounts/khainiem"><img src="/assets/images/luathanhchinh.jpg"></a>
+					<div class="team-items-text">
+						<h2>Luật</h2>
+						<span>Hành Chính</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="footer">
+		<div class="footer-bg"></div>
+		<div class="conteiner">
+			<div class="row justify-content">
+				<div class="footer-item">
+					<h2>Địa Chỉ</h2>
+					<p>
+						2,Trần Nam Phú<br>Ninh Kiều, Cần Thơ
+					</p>
+				</div>
+				<div class="footer-item">
+					<h2>Giờ Phục Vụ</h2>
+					<p>
+						7:30 - 22:00<br>All day
+					</p>
+				</div>
+				<div class="footer-item">
+					<h2>Liên Hệ</h2>
+					<p>
+						Phone: 0945518212<br>Email: luckyman5@gmail.com
+					</p>
+					<div class="footer-social">
+						<i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i
+							class="fab fa-youtube"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="conteiner">
+			<div class="footer-copyright">Helolooooooooooooooooooooooo</div>
+		</div>
+	</section>
+
+	<script src="/assets/js/script.js"></script>
+</body>
+</html>
+
+</body>
+</html>

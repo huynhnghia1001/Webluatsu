@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://kit.fontawesome.com/54f0cb7e4a.js" crossorigin="anonymous"></script>
+	<link href="/assets/css/style1.css" rel="stylesheet" />
+	<title>Hello</title>
+	<style>
+		.big-image {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100vw;
+			height: 100vh;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.big-image::before {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-image: url("/assets/images/bia1.jpg");
+			background-position: center;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+			z-index: -2;
+			animation: Inout 5s infinite;
+		}
+
+		@keyframes Inout {
+
+			0%,
+			100% {
+				transform: scale(1);
+			}
+
+			50% {
+				transform: scale(1.1);
+			}
+		}
+
+		.big-image::after {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			background-color: black;
+			opacity: 0.3;
+			z-index: -2;
+		}
+
+		.big-image .big-image-content {
+			text-align: center;
+			max-width: 500px;
+		}
+
+		.big-image .big-image-content h2 {
+			font-size: 50px;
+			color: var(--text-color);
+			font-family: 'Dancing Script';
+		}
+
+		.big-image .big-image-content p {
+			font-size: 25px;
+			color: var(--text-color);
+			font-weight: 15px 0;
+		}
+
+		.footer-bg {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-image: url("/assets/images/footer.jpg");
+			z-index: -2;
+		}
+	</style>
+</head>
+
+<body>
+	<div th:replace="/layout/_menu1.html"></div> 
+
+	<section class="big-image" >
+
+		<div class="big-image-content">
+			<h2>Siêu Luật Sư</h2>
+			<p>Hãy để công lý được thực hiện cho dù bầu trời có sụp đổ </p>
+		</div>
+	</section>
+
+	<section class="menu section-pading">
+		<div class="conteiner">
+			<div class="row">
+				<div class="section-title">
+					<h2 data-title="Khái Niệm">Luật</h2>
+				</div>
+			</div>
+			  <div class="row">
+				<div class="menu-title">
+				<div class="khainiem">
+					<a th:each="c:${cates}"
+							th:href="@{|/list/khainiem?cid=${c.id}|}" class="list-group-item">[[${c.name}]]<br></a>
+							</div>
+				</div>
+			</div> 
+			<div class="row justify-content">
+				<div class="menu-item-content active" id="hs">
+					<div th:each="p: ${items}" class="food-items">
+						<div class="food-item">
+							<img th:src="@{|/assets/images/${p.image}|}"></a>
+							<p>[[${p.content}]]</p>
+						</div>
+					</div>
+					<!-- <div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/hs.jpg">
+							<p th:text="#{kn.1.2}">Tội phạm là hành vi nguy hiểm cho xã hội được quy định trong Bộ luật Hình sự, do người có
+								năng lực trách nhiệm hình sự hoặc pháp nhân thương mại thực hiện một cách cố ý hoặc vô
+								ý, xâm phạm độc lập, chủ quyền, thống nhất, toàn vẹn lãnh thổ Tổ quốc, xâm phạm chế độ
+								chính trị, chế độ kinh tế, nền văn hóa, quốc phòng, an ninh, trật tự, an toàn xã hội,
+								quyền, lợi ích hợp pháp của tổ chức, xâm phạm quyền con người, quyền, lợi ích hợp pháp
+								của công dân, xâm phạm những lĩnh vực khác của trật tự pháp luật xã hội chủ nghĩa mà
+								theo quy định của Bộ luật này phải bị xử lý hình sự.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/hs.jpg">
+							<p th:text="#{kn.1.3}"> Những hành vi tuy có dấu hiệu của tội phạm nhưng tính chất nguy hiểm cho xã hội không
+								đáng kể thì không phải là tội phạm và được xử lý bằng các biện pháp khác.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/hs.jpg">
+							<p th:text="#{kn.1.4}">Điều luật được áp dụng đối với một hành vi phạm tội là điều luật đang có hiệu lực thi
+								hành tại thời điểm mà hành vi phạm tội được thực hiện.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/hs.jpg">
+							<p th:text="#{kn.1.5}">Điều luật quy định một tội phạm mới, một hình phạt nặng hơn, một tình tiết tăng nặng mới
+								hoặc hạn chế phạm vi áp dụng án treo, miễn trách nhiệm hình sự, loại trừ trách nhiệm
+								hình sự, miễn hình phạt, giảm hình phạt, xóa án tích và quy định khác không có lợi cho
+								người phạm tội, thì không được áp dụng đối với hành vi phạm tội đã thực hiện trước khi
+								điều luật đó có hiệu lực thi hành.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/hs.jpg">
+							<p th:text="#{kn.1.6}">Điều luật xóa bỏ một tội phạm, một hình phạt, một tình tiết tăng nặng, quy định một hình
+								phạt nhẹ hơn, một tình tiết giảm nhẹ mới hoặc mở rộng phạm vi áp dụng án treo, miễn
+								trách nhiệm hình sự, loại trừ trách nhiệm hình sự, miễn hình phạt, giảm hình phạt, tha
+								tù trước thời hạn có điều kiện, xóa án tích và quy định khác có lợi cho người phạm tội,
+								thì được áp dụng đối với hành vi phạm tội đã thực hiện trước khi điều luật đó có hiệu
+								lực thi hành.</p>
+						</div>
+
+					</div>
+				</div>
+				<div class="menu-item-content" id="gd">
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/gd.jpg">
+							<p th:text="#{kn.2.1}">Tìm hiểu khái niệm Luật Hôn nhân và gia đình năm 2014 với 3 ý nghĩa:<br>
+
+								- Với ý nghĩa là một môn học: Luật Hôn nhân và gia đình Việt Nam là hệ thống khái niệm,
+								quan điểm, nhận thức, đánh giá mang tính lý luận về pháp luật hôn nhân và gia đình Và
+								thực tiễn áp dụng, thi hành pháp luật hôn nhân và gia đình.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/gd.jpg">
+							<p th:text="#{kn.2.2}">- Với ý nghĩa là một văn bản pháp luật cụ thể: Luật Hôn nhân và gia đình Việt Nam là văn
+								bản pháp luật trong đó có chứa đựng các quy phạm pháp luật hôn nhân và gia đình. Ví dụ:
+								Luật Hôn nhân và gia đình năm 1959, Luật Hôn nhân và gia đình năm 1986, Luật Hôn nhân và
+								gia đình năm 2000.</p>
+						</div>
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/gd.jpg">
+							<p th:text="#{kn.2.3}">- Với ý nghĩa là một ngành luật: Luật Hôn nhân và gia đình Việt Nam là tổng hợp các quy
+								phạm pháp luật do Nhà nước ban hành nhằm điều chỉnh các quan hệ hôn nhân và gia đình,
+								bao gồm các quan hệ về nhân thân và quan hệ về tài sản giữa vợ và chồng, giữa cha mẹ và
+								con, giữa những thành viên trong gia đình.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/gd.jpg">
+							<p th:text="#{kn.2.4}"> Điều 1. Phạm vi điều chỉnh<br>
+								Luật này quy định chế độ hôn nhân và gia đình; chuẩn mực pháp lý cho cách ứng xử giữa
+								các thành viên gia đình; trách nhiệm của cá nhân, tổ chức, Nhà nước và xã hội trong việc
+								xây dựng, củng cố chế độ hôn nhân và gia đình.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/gd.jpg">
+							<p th:text="#{kn.2.5}">
+								Điều 2. Những nguyên tắc cơ bản của chế độ hôn nhân và gia đình<br>
+
+								1. Hôn nhân tự nguyện, tiến bộ, một vợ một chồng, vợ chồng bình đẳng.
+
+								2. Hôn nhân giữa công dân Việt Nam thuộc các dân tộc, tôn giáo, giữa người theo tôn giáo
+								với người không theo tôn giáo, giữa người có tín ngưỡng với người không có tín ngưỡng,
+								giữa công dân Việt Nam với người nước ngoài được tôn trọng và được pháp luật bảo vệ.
+							</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/gd.jpg">
+							<p th:text="#{kn.2.6}">Điều 3. Giải thích từ ngữ<br>
+								Trong Luật này, các từ ngữ dưới đây được hiểu như sau:
+
+								1. Hôn nhân là quan hệ giữa vợ và chồng sau khi kết hôn.<br>
+
+								2. Gia đình là tập hợp những người gắn bó với nhau do hôn nhân, quan hệ huyết thống hoặc
+								quan hệ nuôi dưỡng, làm phát sinh các quyền và nghĩa vụ giữa họ với nhau theo quy định
+								của Luật này.
+							</p>
+						</div>
+
+					</div>
+				</div>
+				<div class="menu-item-content" id="ds">
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/ds.jpg">
+							<p th:text="#{kn.3.1}">Luật dân sự là ngành luật trong hệ thống pháp luật, là tổng hợp những quy phạm điều chỉnh
+								các quan hệ tài sản và một số quan hệ nhân thân trong giao lưu dân sự trên cơ sở bình
+								đẳng, tự định đoạt và tự chịu trách nhiệm của các chủ thể tham gia các quan hệ dân sự
+							</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/ds.jpg">
+							<p th:text="#{kn.3.2}">Bộ luật này quy định địa vị pháp lý, chuẩn mực pháp lý về cách ứng xử của cá nhân, pháp
+								nhân; quyền, nghĩa vụ về nhân thân và tài sản của cá nhân, pháp nhân trong các quan hệ
+								được hình thành trên cơ sở bình đẳng, tự do ý chí, độc lập về tài sản và tự chịu trách
+								nhiệm (sau đây gọi chung là quan hệ dân sự).</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/ds.jpg">
+							<p th:text="#{kn.3.3}">Ở nước Cộng hòa xã hội chủ nghĩa Việt Nam, các quyền dân sự được công nhận, tôn trọng,
+								bảo vệ và bảo đảm theo Hiến pháp và pháp luật.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/ds.jpg">
+							<p th:text="#{kn.3.4}">Quyền dân sự chỉ có thể bị hạn chế theo quy định của luật trong trường hợp cần thiết vì
+								lý do quốc phòng, an ninh quốc gia, trật tự, an toàn xã hội, đạo đức xã hội, sức khỏe
+								của cộng đồng.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/ds.jpg">
+							<p th:text="#{kn.3.5}">Bộ luật này là luật chung điều chỉnh các quan hệ dân sự.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/ds.jpg">
+							<p th:text="#{kn.3.6}">Luật khác có liên quan điều chỉnh quan hệ dân sự trong các lĩnh vực cụ thể không được
+								trái với các nguyên tắc cơ bản của pháp luật dân sự quy định tại Điều 3 của Bộ luật này.
+							</p>
+						</div>
+
+					</div>
+				</div>
+				<div class="menu-item-content" id="ts">
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/hc.jpg">
+							<p th:text="#{kn.4.1}">Luật hành chính là ngành luật điều chỉnh các quan hệ xã hội phát sinh trong hoạt động
+								quản lí hành chính nhà nước. Cách định nghĩa này phù hợp với quan niệm cho rằng việc
+								phân biệt các ngành luật trước hết cần căn cứ vào những quan hệ xã hội được pháp luật
+								điều chỉnh.</p>
+						</div>
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/hc.jpg">
+							<p th:text="#{kn.4.2}">Hoạt động quản lí hành chính nhà nước không thể tách rời những quan hệ xã hội mà nó hướng
+								tới nhằm ổn định hay thay đổi cho nên đối tượng điều chỉnh của luật hành chính không
+								phải là bản thân quản lí hành chính nhà nước mà là những quan hệ xã hội hình thành trong
+								quá trình hoạt động quản lí hành chính nhà nước. Việc phần lớn các quy phạm pháp luật
+								hành chính liên quan đến các hình thức tổ chức, đến hoạt động quản lí hành chính nhà
+								nước không thay đổi một thực tế là chứng bắt nguồn từ những quan hệ xã hội.</p>
+						</div>
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/hc.jpg">
+							<p th:text="#{kn.4.3}">Luật hành chính giữ vai trò quan trọng trong việc hoàn thiện hoạt động chấp hành - điều
+								hành của Nhà nước. Các quy phạm luật hành chính quy định địa vị pháp lí của các cơ quan
+								hành chính nhà nước, xác định những nguyên tắc cơ bản của</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/hc.jpg">
+							<p th:text="#{kn.4.4}">Định nghĩa trên thích hợp với tất cả mọi trường hợp từ sự vận động của một cơ thể sống,
+								một vật thể cơ giới, một thiết bị tự động hóa đến hoạt động của một tổ chức xã hội, một
+								đơn vị kinh tế hay cơ quan nhà nước.</p>
+						</div>
+
+					</div>
+					<div class="food-items">
+						<div class="food-item">
+							<img src="/assets/images/hc.jpg">
+							<p th:text="#{kn.4.5}">Trong chương trình luật hành chính, vấn đề cần nghiên cứu là quản lí xã hội, quản lí nhà
+								nước.</p>
+						</div>
+
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+
+	<section class="footer">
+		<div class="footer-bg">
+
+		</div>
+		<div class="conteiner">
+			<div class="row justify-content">
+				<div class="footer-item">
+					<h2>Địa Chỉ</h2>
+					<p>2,Trần Nam Phú<br>Ninh Kiều, Cần Thơ</p>
+				</div>
+				<div class="footer-item">
+					<h2>Giờ Phục Vụ</h2>
+					<p>7:30 - 22:00<br>All day</p>
+				</div>
+				<div class="footer-item">
+					<h2>Liên Hệ</h2>
+					<p>Phone: 0945518212<br>Email: luckyman5@gmail.com</p>
+					<div class="footer-social">
+						<i class="fab fa-facebook"></i>
+						<i class="fab fa-instagram"></i>
+						<i class="fab fa-youtube"></i>
+					</div>
+				</div>-->
+			</div>
+		</div> 
+		<div class="conteiner">
+			<div class="footer-copyright">
+				Helolooooooooooooooooooooooo
+			</div>
+		</div>
+		</div>
+	</section>
+
+	<script src="/assets/js/script.js"></script>
+</body>
+
+</html>

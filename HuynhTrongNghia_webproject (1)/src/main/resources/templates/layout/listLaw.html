@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index1 :: dynamic(~{::main})}">
+	<body>
+	     <main class="row">
+    
+				<div th:each="p: ${items}" class="phan-hoi-items">
+					<div class="phan-hoi-item">
+						<div class="phan-hoi-item-content">
+							<div class="phan-hoi-item-img-content-text">
+								<h2>$[[${p.fullname}]]</h2>
+								<p>Luật Sư</p>
+							</div>
+							<div class="phan-hoi-item-img-content-img">
+								<!-- <a th:href="@{|/law/detail/${p.id}|}">  -->
+								<img th:src="@{|/assets/images/${p.image}|}">
+					<!-- </a> -->
+							</div>
+						</div>
+						<p>$[[${p.infomation}]]</p>
+						<div class="phan-hoi-item-star">
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+							<i class="fas fa-star"></i>
+						</div>
+					</div>	
+				</div>
+</main>
+	</body>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/54f0cb7e4a.js"
+	crossorigin="anonymous"></script>
+<link href="/assets/css/style1.css" rel="stylesheet" />
+<title>Hello</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+</head>
+<body ng-app="admin-app">
+<div class="panel panel-default">
+   <div class="panel-heading" th:text="#{home.autho}">AUTHORIZING</div>
+   <table class="table table-border">
+      <thead class="bg-success" style="font-variant:small-caps;">
+         <tr>
+            <th></th>
+            <th ng-repeat="role in roles" class="text-center">{{role.name}}</th>
+         </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="acc in admins">
+             <td>{{acc.username}}</td>
+             <th ng-repeat="role in roles" class="text-center">
+                <input ng-checked="authority_of(acc,role)" ng-click="authority_changed(acc,role)" type="checkbox">
+             </th>
+          </tr>
+      </tbody>
+   </table>
+</div>
+<script src="/assets/admin/account/account-ctrl.js"></script>
+</body>
+</html>

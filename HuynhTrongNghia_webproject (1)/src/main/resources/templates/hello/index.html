@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Spring MVC + Thymeleaf + Send email</title>
+
+<!-- Meta tag Keywords -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="Online Login Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<script type="application/x-javascript">
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
+<!-- Meta tag Keywords -->
+<!-- css files -->
+<link rel="stylesheet" href="/assets/css/style4.css" type="text/css"
+	media="all" />
+	
+	<link href="/assets/css/style1.css" rel="stylesheet" />
+<!-- Style-CSS -->
+<link rel="stylesheet" href="/assets/css/font-awesome.css">
+<!-- Font-Awesome-Icons-CSS -->
+<!-- //css files -->
+<!-- online-fonts -->
+<link
+	href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
+	rel="stylesheet">
+<link
+	href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext"
+	rel="stylesheet">
+<!-- //online-fonts -->
+
+</head>
+<body>
+	<div class="center-container">
+		<!--header-->
+		<section class="top">
+		<div class="conteiner">
+			<div class="row justify-content">
+				<a href="/home/index">
+					<div class="logo"><img src="/assets/images/a.png"></div>
+				</a>
+				<div class="menu-bar">
+				<h2><a th:if="${#request.isUserInRole('LAW') or #request.isUserInRole('ADMIN')}">
+						<a th:href="@{/admin/home/index}">Admin</a></h2>
+						<br>
+					<a th:href="@{/home/index}" >
+					<h2 th:text="#{nav.home}"></h2>
+					</a>
+					<a th:href="@{/accounts/khainiem}">
+						<h2 th:text="#{nav.kn}"></h2>
+					</a>
+					<a th:href="@{/accounts/loginForm}">
+						<h2 th:text="#{nav.dn}"></h2>
+					</a>
+					<a th:href="@{/accounts/doimk}">
+						<h2 th:text="#{nav.dmk}">Đổi Mật Khẩu</h2>
+					</a>
+					<div class="bao">
+						<h4><a href="?lang=vi">Vietnamese||</a>
+						<a href="?lang=en">English</a></h4>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+		<div class="header-w3l">
+			<h1></h1>
+		</div>
+		<!--//header-->
+		<div class="main-content-agile">
+			<div class="sub-main-w3">
+				<div class="wthree-pro">
+					<h2>Email</h2>
+				</div>
+				<form th:action="@{/sendEmail}" th:object="${mailBox}" method="post">	
+				<input type="hidden" name="id" th:value="${abc}">
+					<div class="pom-agile">
+						<input placeholder="To" name="ten" th:value="${#request.remoteUser}" class="user"
+							type="text" readonly="readonly"> <span class="icon1"><i
+							class="fa fa-user" aria-hidden="true"></i></span>
+					</div>
+					<div class="pom-agile">
+						<textarea placeholder="Message" th:field="*{message}" class="user"
+						rows="5" cols="30"></textarea>
+						<span class="icon1"><i class="fa fa-user"
+							aria-hidden="true"></i></span>
+					</div>
+					<div class="sub-w3l">
+						<div class="right-w3l">
+							<input type="submit" value="Submit" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--//main-->
+		<!--footer-->
+		<div class="footer">
+			<p>
+				&copy; 2017 Online Login Form. All rights reserved | Design by <a
+					href="http://w3layouts.com">W3layouts</a>
+			</p>
+		</div>
+		<!--//footer-->
+	</div>
+</body>
+</html>
